@@ -72,7 +72,7 @@ OBJDUMP=fromelf
         endif
     endif
 
-COMPILER_OPTIONS= --target=arm-arm-none-eabi $(TARGET_SWITCH) -Wall -Werror -fshort-enums -fshort-wchar -funsigned-char -fdata-sections -ffunction-sections -mno-unaligned-access -mfpu=none
+COMPILER_OPTIONS= --target=arm-arm-none-eabi $(TARGET_SWITCH) -Wall -Werror -fshort-enums -fshort-wchar -funsigned-char -fdata-sections -ffunction-sections -mno-unaligned-access -mfpu=none -gdwarf-2 -o0
 AR_OPTIONS= --create -cr
 LINKER_OPTIONS= --strict --map --symbols --xref  --info=summarysizes,sizes,totals,unused,veneers --diag_warning=L6204
 OBJDUMP_OPTIONS= -c -d --datasymbols
