@@ -16,6 +16,7 @@
 **/
 
 #include "pal_uart.h"
+#include "NuMicro.h"
 
 volatile uint32_t g_uart;
 
@@ -24,6 +25,18 @@ volatile uint32_t g_uart;
 **/
 void pal_uart_cmsdk_init(uint32_t uart_base_addr)
 {
+#if 1 // for M2351
+    UART_T *uart;
+
+    g_uart = uart_base_addr;
+
+    uart = (UART_T *)uart_base_addr;
+
+    uart->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
+    uart->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
+
+#else
+
     g_uart = uart_base_addr;
 
     /* Disable RX and TX interrupts, disable overrun interrupts, enable TX,
@@ -32,23 +45,50 @@ void pal_uart_cmsdk_init(uint32_t uart_base_addr)
     /* However, the UART resets to a BAUDDIV of 0, which is invalid. Set it to
     * the minimum valid number. */
     ((uart_t *) g_uart)->BAUDDIV = 16;
+#endif    
 
 }
 
 /**
     @brief    - This function checks for empty TX FIFO
 **/
+#if 0
 static int pal_uart_cmsdk_is_tx_empty(void)
 {
     /* Note: Check for empty TX FIFO */
+#if 1 // for M2351
+    UART_T *uart;
+
+    uart = (UART_T *)g_uart;
+
+    return ((uart->FIFOSTS & UART_FIFOSTS_TXEMPTYF_Msk)?1:0);
+#else
     return (!(((uart_t *) g_uart)->STATE & CMSDK_UART_STATE_TXBF_Msk));
+#endif
 }
+#endif
 
 /**
     @brief    - This function checks for empty TX FIFO and writes to FIFO register
 **/
 static void pal_uart_cmsdk_putc(uint8_t c)
 {
+#if 1 // for M2351
+    UART_T *uart;
+
+    uart = (UART_T *)g_uart;
+    /* ensure TX buffer is not full */
+    while(uart->FIFOSTS & UART_FIFOSTS_TXFULL_Msk);
+
+    /* write the data (upper 24 bits are reserved) */
+    uart->DAT = c;
+    if (c == '\n')
+    {
+        pal_uart_cmsdk_putc('\r');
+    }
+
+#else
+
     /* ensure TX buffer to be empty */
     while (!pal_uart_cmsdk_is_tx_empty());
 
@@ -58,6 +98,7 @@ static void pal_uart_cmsdk_putc(uint8_t c)
     {
         pal_uart_cmsdk_putc('\r');
     }
+#endif    
 }
 
 /**
