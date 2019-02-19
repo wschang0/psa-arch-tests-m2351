@@ -26,6 +26,7 @@
 **/
 int pal_wd_cmsdk_init(addr_t base_addr, uint32_t time_us, uint32_t timer_tick_us)
 {
+#if 0 // M2351
     /* Disable Timer */
     ((wd_timer_t *)base_addr)->CTRL = 0x0;
 
@@ -37,7 +38,7 @@ int pal_wd_cmsdk_init(addr_t base_addr, uint32_t time_us, uint32_t timer_tick_us
     {
         ((wd_timer_t *)base_addr)->LOAD = time_us * timer_tick_us;
     }
-
+#endif
     return 0;
 }
 
@@ -48,8 +49,10 @@ int pal_wd_cmsdk_init(addr_t base_addr, uint32_t time_us, uint32_t timer_tick_us
 **/
 int pal_wd_cmsdk_enable(addr_t base_addr)
 {
+#if 0 // M2351
     /* Enable counter by enabling intr and reset */
      ((wd_timer_t *)base_addr)->CTRL = (Watchdog_CTRL_INTEN_Msk | Watchdog_CTRL_RESEN_Msk);
+#endif
 
     return 0;
 }
@@ -61,10 +64,11 @@ int pal_wd_cmsdk_enable(addr_t base_addr)
 **/
 int pal_wd_cmsdk_disable(addr_t base_addr)
 {
+#if 0 // M2351
     /* Disable Timer */
     ((wd_timer_t *)base_addr)->CTRL   = 0x0;
     ((wd_timer_t *)base_addr)->INTCLR = 0x1;
-
+#endif
     return 0;
 }
 
@@ -75,7 +79,11 @@ int pal_wd_cmsdk_disable(addr_t base_addr)
 **/
 int pal_wd_cmsdk_is_enabled(addr_t base_addr)
 {
+#if 1 // M2351
+    return 1;
+#else
     return (((wd_timer_t *)base_addr)->CTRL & Watchdog_CTRL_INTEN_Msk ? \
     (((wd_timer_t *)base_addr)->CTRL & Watchdog_CTRL_RESEN_Msk ? 1 : 0) : 0);
+#endif
 }
 
