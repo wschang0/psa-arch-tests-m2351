@@ -72,7 +72,7 @@ OBJDUMP=fromelf
         endif
     endif
 
-COMPILER_OPTIONS= --target=arm-arm-none-eabi $(TARGET_SWITCH) -Wall -Werror -fshort-enums -fshort-wchar -funsigned-char -fdata-sections -ffunction-sections -mno-unaligned-access -mfpu=none
+COMPILER_OPTIONS= --target=arm-arm-none-eabi $(TARGET_SWITCH) -Wall -Werror -fshort-enums -fshort-wchar -funsigned-char -fdata-sections -ffunction-sections -mno-unaligned-access -mfpu=none -gdwarf-3 -o0
 AR_OPTIONS= --create -cr
 LINKER_OPTIONS= --strict --map --symbols --xref  --info=summarysizes,sizes,totals,unused,veneers --diag_warning=L6204
 OBJDUMP_OPTIONS= -c -d --datasymbols
@@ -112,6 +112,8 @@ endif
 ifeq (${PSA_INITIAL_ATTESTATION_IMPLEMENTED}, 1)
 COMPILER_OPTIONS += -DPSA_INITIAL_ATTESTATION_IMPLEMENTED=1
 endif
+
+COMPILER_OPTIONS += -DM2351=1
 
 CC= $(COMPILER) $(COMPILER_OPTIONS) $(CC_OPTIONS) $(USER_INCLUDE) $(INCLUDE)
 AS= $(ASSEMBLER) $(ASSEMBLER_OPTIONS) $(AS_OPTIONS)
