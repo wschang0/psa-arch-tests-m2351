@@ -20,15 +20,16 @@
 
 (START)
 
-test_c001
-test_c002
-test_c003
-test_c004
-test_c005
-test_c006
-test_c007
-test_c008
-test_c009
+#test_c001
+#test_c002
+#test_c003
+#test_c004
+#test_c005
+#test_c006
+#test_c007
+#test_c008
+#test_c009
+
 #test_c010
 #test_c011
 #test_c012
@@ -37,8 +38,10 @@ test_c009
 #test_c015
 #test_c016
 #test_c017
-#test_c018
-#test_c019
+
+test_c018
+test_c019
+
 #test_c020
 #test_c021
 #test_c022
@@ -53,6 +56,7 @@ test_c009
 #test_c031
 #test_c032
 #test_c033
+
 #test_c034
 #test_c035
 #test_c036
