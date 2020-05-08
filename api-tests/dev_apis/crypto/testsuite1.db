@@ -25,10 +25,10 @@ test_c002
 test_c003
 test_c004
 test_c005
-test_c006
-test_c007
-test_c008
-test_c009
+#test_c006
+#test_c007
+#test_c008
+#test_c009
 #test_c010
 #test_c011
 #test_c012

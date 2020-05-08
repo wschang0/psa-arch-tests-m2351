@@ -46,10 +46,10 @@
 #test_c024
 #test_c025
 
-test_c026
-test_c027
-test_c028
-test_c029
+#test_c026
+#test_c027
+#test_c028
+#test_c029
 #test_c030
 #test_c031
 #test_c032
@@ -61,10 +61,11 @@ test_c029
 #test_c037
 #test_c038
 #test_c039
+
 #test_c040
 #test_c041
 #test_c042
-#test_c043
-#test_c044
+test_c043
+test_c044
 
 (END)
