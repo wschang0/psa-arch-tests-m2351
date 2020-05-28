@@ -22,7 +22,7 @@
 #define val CONCAT(val,test_entry)
 #define psa CONCAT(psa,test_entry)
 
-#define TOKEN_SIZE          512
+#define TOKEN_SIZE          (512+128)
 
 extern val_api_t *val;
 extern psa_api_t *psa;
