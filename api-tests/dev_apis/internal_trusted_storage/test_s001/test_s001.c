@@ -39,10 +39,11 @@ static uint8_t read_buff[TEST_BUFF_SIZE]  = {0};
 static int32_t sst_calls_without_set_call(psa_sst_uid_t p_uid)
 {
     uint32_t status;
+    size_t  p_data_length = 0;
 
     /* get() without using set() before */
     val->print(PRINT_TEST, "[Check 1] Call get API for UID %d which is not set\n", p_uid);
-    status = SST_FUNCTION(s001_data[1].api, p_uid, 0, TEST_BUFF_SIZE, read_buff);
+    status = SST_FUNCTION(s001_data[1].api, p_uid, 0, TEST_BUFF_SIZE, read_buff, &p_data_length);
     TEST_ASSERT_EQUAL(status,s001_data[1].status,TEST_CHECKPOINT_NUM(1));
 
     /*  get_info() without using set() before */
@@ -80,10 +81,11 @@ static int32_t sst_set_and_remove(psa_sst_uid_t p_uid)
 static int32_t sst_calls_after_uid_remove(psa_sst_uid_t p_uid)
 {
     uint32_t status;
+    size_t  p_data_length = 0;
 
     /* get() for UID which is removed */
     val->print(PRINT_TEST, "[Check 4] Call get API for UID %d which is removed\n", p_uid);
-    status = SST_FUNCTION(s001_data[7].api, p_uid, 0, TEST_BUFF_SIZE, read_buff);
+    status = SST_FUNCTION(s001_data[7].api, p_uid, 0, TEST_BUFF_SIZE, read_buff, &p_data_length);
     TEST_ASSERT_EQUAL(status, s001_data[7].status, TEST_CHECKPOINT_NUM(7));
 
     /* get_info() for UID which is removed */
@@ -102,6 +104,7 @@ static int32_t sst_calls_after_uid_remove(psa_sst_uid_t p_uid)
 static int32_t sst_calls_with_different_uid(psa_sst_uid_t p_uid)
 {
     uint32_t status;
+    size_t  p_data_length = 0;
 
     /* set() a UID */
     val->print(PRINT_TEST, "Set storage for UID %d\n", p_uid);
@@ -110,7 +113,7 @@ static int32_t sst_calls_with_different_uid(psa_sst_uid_t p_uid)
 
     /* get() for different UID then set UID */
     val->print(PRINT_TEST, "[Check 7] Call get API for different UID %d\n", p_uid);
-    status = SST_FUNCTION(s001_data[11].api, p_uid-1, 0, TEST_BUFF_SIZE - 1, read_buff);
+    status = SST_FUNCTION(s001_data[11].api, p_uid-1, 0, TEST_BUFF_SIZE - 1, read_buff, &p_data_length);
     TEST_ASSERT_EQUAL(status, s001_data[11].status, TEST_CHECKPOINT_NUM(11));
 
     /* get_info() for different UID then set UID */

@@ -34,25 +34,25 @@ static const test_data s005_data[] = {
  0, 0  /* This is dummy for index0 */
 },
 {
- VAL_ITS_SET, PSA_ITS_SUCCESS  /* Create a valid storage entity */
+ VAL_ITS_SET, PSA_SUCCESS  /* Create a valid storage entity */
 },
 {
- VAL_ITS_GET, PSA_ITS_SUCCESS  /* Validate the data using get API */
-},
-{
- 0, 0 /* Index not used */
-},
-{
- VAL_ITS_GET_INFO, PSA_ITS_SUCCESS  /* Validate the data attributes get_info API */
+ VAL_ITS_GET, PSA_SUCCESS  /* Validate the data using get API */
 },
 {
  0, 0 /* Index not used */
 },
 {
+ VAL_ITS_GET_INFO, PSA_SUCCESS  /* Validate the data attributes get_info API */
+},
+{
  0, 0 /* Index not used */
 },
 {
- VAL_ITS_REMOVE, PSA_ITS_SUCCESS /* Remove the valid storage entity */
+ 0, 0 /* Index not used */
+},
+{
+ VAL_ITS_REMOVE, PSA_SUCCESS /* Remove the valid storage entity */
 },
 };
 #endif /* _TEST_S005_ITS_DATA_TESTS_H_ */

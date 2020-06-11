@@ -33,10 +33,10 @@ static const test_data s003_data[] = {
  0, 0 /* This is dummy for index0 */
 },
 {
- VAL_ITS_SET, PSA_ITS_ERROR_INSUFFICIENT_SPACE /* Call set API till insufficent space */
+ VAL_ITS_SET, PSA_ERROR_INSUFFICIENT_STORAGE /* Call set API till insufficent space */
 },
 {
- VAL_ITS_REMOVE, PSA_ITS_SUCCESS /* Remove the UID created */
+ VAL_ITS_REMOVE, PSA_SUCCESS /* Remove the UID created */
 },
 };
 #endif /* _TEST_S003_ITS_DATA_TESTS_H_ */

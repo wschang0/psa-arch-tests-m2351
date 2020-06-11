@@ -20,6 +20,8 @@
 
 #include "pal_common.h"
 
+#include "error.h"
+
 #ifndef VAL_NSPE_BUILD
 #define STATIC_DECLARE  static
 #else
@@ -284,6 +286,15 @@ typedef struct {
     uint8_t  state;
     uint8_t  status;
 } test_status_buffer_t;
+
+
+typedef uint32_t psa_storage_create_flags_t;
+typedef int32_t psa_its_status_t;
+struct psa_its_info_t {
+    size_t capacity;
+    size_t size;
+    psa_storage_create_flags_t flags;
+};
 
 typedef int32_t (*client_test_t)(security_t caller);
 typedef int32_t (*server_test_t)(void);

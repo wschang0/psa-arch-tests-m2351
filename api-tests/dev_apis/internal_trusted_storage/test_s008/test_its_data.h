@@ -32,43 +32,43 @@ static const test_data s008_data[] = {
  0, 0 /* This is dummy for index0 */
 },
 {
- VAL_ITS_SET, PSA_ITS_SUCCESS /* Create a valid storage entity with zero flag value */
+ VAL_ITS_SET, PSA_SUCCESS /* Create a valid storage entity with zero flag value */
 },
 {
- VAL_ITS_GET, PSA_ITS_SUCCESS /* Call get API with offset + data_len = total_size */
+ VAL_ITS_GET, PSA_SUCCESS /* Call get API with offset + data_len = total_size */
 },
 {
  0, 0 /* This is dummy for index3 */
 },
 {
- VAL_ITS_GET, PSA_ITS_SUCCESS /* Call get API with offset + data_len < total_size */
+ VAL_ITS_GET, PSA_SUCCESS /* Call get API with offset + data_len < total_size */
 },
 {
  0, 0 /* This is dummy for index5 */
 },
 {
- VAL_ITS_GET, PSA_ITS_SUCCESS /* Call get API with offset = total data_size + 1 */
+ VAL_ITS_GET, PSA_SUCCESS /* Call get API with offset = total data_size + 1 */
 },
 {
  0, 0 /* This is dummy for index7 */
 },
 {
- VAL_ITS_GET, PSA_ITS_ERROR_INCORRECT_SIZE /* get API with offset + data_len > total data_size */
+ VAL_ITS_GET, PSA_SUCCESS /* get API with offset + data_len > total data_size */
 },
 {
  0, 0 /* This is dummy for index9 */
 },
 {
- VAL_ITS_GET, PSA_ITS_ERROR_INCORRECT_SIZE /* Call get API with invalid data len and offset zero */
+ VAL_ITS_GET, PSA_SUCCESS /* Call get API with invalid data len and offset zero */
 },
 {
  0, 0 /* This is dummy for index11 */
 },
 {
- VAL_ITS_GET, PSA_ITS_SUCCESS /* Call get API with offset = MAX_UINT32 */
+ VAL_ITS_GET, PSA_SUCCESS /* Call get API with offset = MAX_UINT32 */
 },
 {
- VAL_ITS_REMOVE, PSA_ITS_SUCCESS /* Remove the storage entity */
+ VAL_ITS_REMOVE, PSA_SUCCESS /* Remove the storage entity */
 },
 };
 #endif /* _TEST_S008_ITS_DATA_TESTS_H_ */

@@ -41,13 +41,14 @@ static int32_t psa_sst_apis_check(psa_sst_uid_t uid, uint32_t data_len,
                                   uint8_t *data_buff, psa_sst_create_flags_t create_flag)
 {
     uint32_t status;
+    size_t p_data_length = 0;
 
     /* Set the UID with the data_len and data_buff */
     status = SST_FUNCTION(s005_data[1].api, uid, data_len, data_buff, create_flag);
     TEST_ASSERT_EQUAL(status, s005_data[1].status, TEST_CHECKPOINT_NUM(1));
 
     /* Call the get function to get the data buffer and match the buffer */
-    status = SST_FUNCTION(s005_data[2].api, uid, 0, data_len, read_buff);
+    status = SST_FUNCTION(s005_data[2].api, uid, 0, data_len, read_buff, &p_data_length);
     TEST_ASSERT_EQUAL(status, s005_data[2].status, TEST_CHECKPOINT_NUM(2));
     TEST_ASSERT_MEMCMP(read_buff, data_buff, data_len, TEST_CHECKPOINT_NUM(3));
 

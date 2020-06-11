@@ -39,7 +39,7 @@ static uint8_t write_buff[TEST_BUFF_SIZE] = {0x99, 0x01, 0x02, 0x03, 0x04, 0x23,
 int32_t psa_sst_zero_length_check(security_t caller)
 {
     uint32_t status;
-
+    
     /* Set data for UID with length 0 and NULL pointer */
     val->print(PRINT_TEST, "[Check 1] Call set API with NULL pointer and data length 0\n", 0);
     status = SST_FUNCTION(s009_data[1].api, uid, 0, NULL, 0);
@@ -51,7 +51,7 @@ int32_t psa_sst_zero_length_check(security_t caller)
 
     /* Call get API with NULL read buffer */
     val->print(PRINT_TEST, "[Check 2] Call get API with NULL read buffer and data length 0\n", 0);
-    status = SST_FUNCTION(s009_data[3].api, uid, 0, 0, NULL);
+    status = SST_FUNCTION(s009_data[3].api, uid, 0, 0, NULL, 0);
     TEST_ASSERT_EQUAL(status, s009_data[3].status, TEST_CHECKPOINT_NUM(3));
 
     /* Remove the UID */
@@ -76,7 +76,7 @@ int32_t psa_sst_zero_length_check(security_t caller)
 
     /* Call get API with NULL read buffer and valid UID */
     val->print(PRINT_TEST, "[Check 8] Call get API with NULL read buffer and data length 0\n", 0);
-    status = SST_FUNCTION(s009_data[9].api, uid, 0, 0, NULL);
+    status = SST_FUNCTION(s009_data[9].api, uid, 0, 0, NULL, 0);
     TEST_ASSERT_EQUAL(status, s009_data[9].status, TEST_CHECKPOINT_NUM(9));
 
     /* Change the length to test_buff_size */

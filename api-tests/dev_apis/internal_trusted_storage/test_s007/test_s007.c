@@ -41,6 +41,7 @@ int32_t psa_sst_get_incorrect_size(security_t caller)
 {
     psa_sst_uid_t uid = UID_BASE_VALUE + 5;
     uint32_t status = VAL_STATUS_SUCCESS;
+    size_t p_data_length = 0;
 
     /* Set the UID with the data_len and data_buff */
     val->print(PRINT_TEST, "Create a valid Storage\n", 0);
@@ -54,11 +55,11 @@ int32_t psa_sst_get_incorrect_size(security_t caller)
 
     /* Access data using get API and old length */
     val->print(PRINT_TEST, "[Check 1] Call get API with old length\n", 0);
-    status = SST_FUNCTION(s007_data[3].api, uid, 0, TEST_BUFF_SIZE/2, read_buff);
+    status = SST_FUNCTION(s007_data[3].api, uid, 0, TEST_BUFF_SIZE/2, read_buff, &p_data_length);
     TEST_ASSERT_EQUAL(status, s007_data[3].status, TEST_CHECKPOINT_NUM(3));
 
     /* Access data using get API and valid length */
-    status = SST_FUNCTION(s007_data[4].api, uid, 0, TEST_BUFF_SIZE/4, read_buff);
+    status = SST_FUNCTION(s007_data[4].api, uid, 0, TEST_BUFF_SIZE/4, read_buff, &p_data_length);
     TEST_ASSERT_EQUAL(status, s007_data[4].status, TEST_CHECKPOINT_NUM(4));
     TEST_ASSERT_MEMCMP(read_buff, write_buff, TEST_BUFF_SIZE/4, TEST_CHECKPOINT_NUM(5));
 
@@ -68,17 +69,17 @@ int32_t psa_sst_get_incorrect_size(security_t caller)
     TEST_ASSERT_EQUAL(status, s007_data[6].status, TEST_CHECKPOINT_NUM(6));
 
     /* Access data using get API and old length */
-    status = SST_FUNCTION(s007_data[7].api, uid, 0, TEST_BUFF_SIZE/2, read_buff);
+    status = SST_FUNCTION(s007_data[7].api, uid, 0, TEST_BUFF_SIZE/2, read_buff, &p_data_length);
     TEST_ASSERT_EQUAL(status, s007_data[7].status, TEST_CHECKPOINT_NUM(7));
 
     /* Access data using get API and old length */
     val->print(PRINT_TEST, "[Check 2] Call get API with old length\n", 0);
-    status = SST_FUNCTION(s007_data[8].api, uid, 0, TEST_BUFF_SIZE, read_buff);
+    status = SST_FUNCTION(s007_data[8].api, uid, 0, TEST_BUFF_SIZE, read_buff, &p_data_length);
     TEST_ASSERT_EQUAL(status, s007_data[8].status, TEST_CHECKPOINT_NUM(8));
 
     /* Access data using correct length */
     val->print(PRINT_TEST, "[Check 3] Call get API with valid length\n", 0);
-    status = SST_FUNCTION(s007_data[9].api, uid, 0, TEST_BUFF_SIZE/4, read_buff);
+    status = SST_FUNCTION(s007_data[9].api, uid, 0, TEST_BUFF_SIZE/4, read_buff, &p_data_length);
     TEST_ASSERT_EQUAL(status, s007_data[9].status, TEST_CHECKPOINT_NUM(9));
 
     /* Remove the UID  */

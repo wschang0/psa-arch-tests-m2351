@@ -35,19 +35,19 @@ static const test_data s006_data[] = {
  0, PSA_ITS_ERROR_FLAGS_NOT_SUPPORTED /* This is dummy for index0 */
 },
 {
- VAL_ITS_SET, PSA_ITS_SUCCESS /* Create a valid storage entity with different flag values */
+ VAL_ITS_SET, PSA_SUCCESS /* Create a valid storage entity with different flag values */
 },
 {
- VAL_ITS_GET_INFO, PSA_ITS_SUCCESS /* Validate the flag value get_info API */
+ VAL_ITS_GET_INFO, PSA_SUCCESS /* Validate the flag value get_info API */
 },
 {
  0, 0 /* Index not used */
 },
 {
- VAL_ITS_REMOVE, PSA_ITS_SUCCESS /* Remove the storage entity */
+ VAL_ITS_REMOVE, PSA_SUCCESS /* Remove the storage entity */
 },
 {
- VAL_ITS_REMOVE, PSA_ITS_ERROR_UID_NOT_FOUND /* Storage entity remove fails */
+ VAL_ITS_REMOVE, PSA_ERROR_DOES_NOT_EXIST /* Storage entity remove fails */
 },
 };
 #endif /* _TEST_S006_ITS_DATA_TESTS_H_ */

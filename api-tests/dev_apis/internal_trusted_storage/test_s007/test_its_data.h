@@ -32,34 +32,34 @@ static const test_data s007_data[] = {
  0, 0 /* This is dummy for index0 */
 },
 {
- VAL_ITS_SET, PSA_ITS_SUCCESS /* Create a valid storage entity */
+ VAL_ITS_SET, PSA_SUCCESS /* Create a valid storage entity */
 },
 {
- VAL_ITS_SET, PSA_ITS_SUCCESS /* Increase the length of storage */
+ VAL_ITS_SET, PSA_SUCCESS /* Increase the length of storage */
 },
 {
- VAL_ITS_GET, PSA_ITS_SUCCESS /* Try to access old length */
+ VAL_ITS_GET, PSA_SUCCESS /* Try to access old length */
 },
 {
- VAL_ITS_GET, PSA_ITS_SUCCESS /* Try to access valid length less than set length */
+ VAL_ITS_GET, PSA_SUCCESS /* Try to access valid length less than set length */
 },
 {
  0, 0 /* This is dummy for index5 */
 },
 {
- VAL_ITS_SET, PSA_ITS_SUCCESS /* Decrease the length of storage */
+ VAL_ITS_SET, PSA_SUCCESS /* Decrease the length of storage */
 },
 {
- VAL_ITS_GET, PSA_ITS_ERROR_INCORRECT_SIZE /* Try to access old length */
+ VAL_ITS_GET, PSA_SUCCESS /* Try to access old length */
 },
 {
- VAL_ITS_GET, PSA_ITS_ERROR_INCORRECT_SIZE /* Try to access old length */
+ VAL_ITS_GET, PSA_SUCCESS /* Try to access old length */
 },
 {
- VAL_ITS_GET, PSA_ITS_SUCCESS /* Try to access data with correct length */
+ VAL_ITS_GET, PSA_SUCCESS /* Try to access data with correct length */
 },
 {
- VAL_ITS_REMOVE, PSA_ITS_SUCCESS /* Remove the storage entity */
+ VAL_ITS_REMOVE, PSA_SUCCESS /* Remove the storage entity */
 },
 };
 #endif /* _TEST_S007_ITS_DATA_TESTS_H_ */

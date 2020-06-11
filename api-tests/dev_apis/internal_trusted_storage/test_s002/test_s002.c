@@ -42,6 +42,7 @@ int32_t psa_sst_update_write_once_flag_after_create(security_t caller)
     uint8_t  write_buff[TEST_BUFF_SIZE/2]     = {0xDE, 0xAD, 0xBE, 0xEF, 0xCA, 0xFE, 0xBA, 0xBE};
     uint8_t  read_buff[TEST_BUFF_SIZE/2]      = {0};
     uint8_t  write_buff_new[TEST_BUFF_SIZE/4] = {0xFF, 0xFF, 0xFF, 0xFF};
+    size_t  p_data_length = 0;
 
     /* set() data without a WRITE_ONCE flag */
     status = SST_FUNCTION(s002_data[1].api, uid, TEST_BUFF_SIZE/2, write_buff, 0);
@@ -54,7 +55,7 @@ int32_t psa_sst_update_write_once_flag_after_create(security_t caller)
     TEST_ASSERT_EQUAL(orig_info.flags, 0, TEST_CHECKPOINT_NUM(4));
 
     /* Check for data consistency using get() */
-    status = SST_FUNCTION(s002_data[5].api, uid, 0, TEST_BUFF_SIZE/2, read_buff);
+    status = SST_FUNCTION(s002_data[5].api, uid, 0, TEST_BUFF_SIZE/2, read_buff, &p_data_length);
     TEST_ASSERT_EQUAL(status, s002_data[5].status, TEST_CHECKPOINT_NUM(5));
     TEST_ASSERT_MEMCMP(write_buff, read_buff, TEST_BUFF_SIZE/2, TEST_CHECKPOINT_NUM(6));
 
@@ -71,7 +72,7 @@ int32_t psa_sst_update_write_once_flag_after_create(security_t caller)
     TEST_ASSERT_EQUAL(new_info.flags, new_info.flags, TEST_CHECKPOINT_NUM(10));
 
     /* Check that data contents are preserved which were written with WRITE_ONCE_FLAG originally */
-    status = SST_FUNCTION(s002_data[11].api, uid, 0, TEST_BUFF_SIZE/4, read_buff);
+    status = SST_FUNCTION(s002_data[11].api, uid, 0, TEST_BUFF_SIZE/4, read_buff, &p_data_length);
     TEST_ASSERT_EQUAL(status, s002_data[11].status, TEST_CHECKPOINT_NUM(11));
     TEST_ASSERT_MEMCMP(write_buff_new, read_buff, TEST_BUFF_SIZE/4, TEST_CHECKPOINT_NUM(12));
 
@@ -94,6 +95,7 @@ int32_t psa_sst_create_with_write_once_flag(security_t caller)
     uint8_t write_buff_new[TEST_BUFF_SIZE + 1] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
                                                   0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
                                                   0xFF};
+    size_t p_data_length = 0;
 
     /* Set data for a UID using WRITE_ONCE flag */
     val->print(PRINT_TEST, "[Check 3] Create a new UID %d with WRITE_ONCE flag\n", uid);
@@ -107,7 +109,7 @@ int32_t psa_sst_create_with_write_once_flag(security_t caller)
     TEST_ASSERT_EQUAL(status, s002_data[15].status, TEST_CHECKPOINT_NUM(15));
 
     /* Check data consistency using get()*/
-    status = SST_FUNCTION(s002_data[16].api, uid, 0, TEST_BUFF_SIZE, read_buff);
+    status = SST_FUNCTION(s002_data[16].api, uid, 0, TEST_BUFF_SIZE, read_buff, &p_data_length);
     TEST_ASSERT_EQUAL(status, s002_data[16].status, TEST_CHECKPOINT_NUM(16));
     TEST_ASSERT_MEMCMP(write_buff, read_buff, TEST_BUFF_SIZE, TEST_CHECKPOINT_NUM(17));
 
@@ -135,7 +137,7 @@ int32_t psa_sst_create_with_write_once_flag(security_t caller)
     TEST_ASSERT_EQUAL(new_info.flags, orig_info.flags, TEST_CHECKPOINT_NUM(25));
 
     /* Check that data contents are preserved which were written with WRITE_ONCE_FLAG originally */
-    status = SST_FUNCTION(s002_data[26].api, uid, 0, TEST_BUFF_SIZE, read_buff);
+    status = SST_FUNCTION(s002_data[26].api, uid, 0, TEST_BUFF_SIZE, read_buff, &p_data_length);
     TEST_ASSERT_EQUAL(status, s002_data[26].status, TEST_CHECKPOINT_NUM(26));
     TEST_ASSERT_MEMCMP(write_buff, read_buff, TEST_BUFF_SIZE, TEST_CHECKPOINT_NUM(27));
 
