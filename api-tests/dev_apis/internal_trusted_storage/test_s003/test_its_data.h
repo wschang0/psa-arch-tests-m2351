@@ -20,8 +20,7 @@
 #include "val_internal_trusted_storage.h"
 
 #define SST_FUNCTION val->its_function
-#define PSA_SST_SUCCESS  PSA_ITS_SUCCESS
-#define psa_sst_uid_t psa_its_uid_t
+
 
 typedef struct {
     enum its_function_code  api;

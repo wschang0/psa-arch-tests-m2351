@@ -32,7 +32,7 @@ typedef struct {
 static struct psa_its_info_t info;
 static const test_data s006_data[] = {
 {
- 0, PSA_ITS_ERROR_FLAGS_NOT_SUPPORTED /* This is dummy for index0 */
+ 0, 0 /* This is dummy for index0 */
 },
 {
  VAL_ITS_SET, PSA_SUCCESS /* Create a valid storage entity with different flag values */

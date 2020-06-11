@@ -287,14 +287,26 @@ typedef struct {
     uint8_t  status;
 } test_status_buffer_t;
 
-
+typedef uint64_t psa_sst_uid_t;
+typedef uint64_t psa_storage_uid_t;
+typedef uint64_t psa_its_uid_t;
 typedef uint32_t psa_storage_create_flags_t;
+typedef uint32_t psa_its_create_flags_t;
 typedef int32_t psa_its_status_t;
 struct psa_its_info_t {
     size_t capacity;
     size_t size;
     psa_storage_create_flags_t flags;
 };
+
+
+#define PSA_ITS_FLAG_NONE        0u
+#define PSA_ITS_FLAG_WRITE_ONCE (1u << 0)
+#define PSA_ITS_FLAG_NO_CONFIDENTIALITY (1u << 1)
+#define PSA_ITS_FLAG_NO_REPLAY_PROTECTION (1u << 2)
+
+#define PSA_SST_SUCCESS PSA_SUCCESS
+
 
 typedef int32_t (*client_test_t)(security_t caller);
 typedef int32_t (*server_test_t)(void);
